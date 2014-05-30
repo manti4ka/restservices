@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Create war file" basedir=".">
+<property name="warfile" value="ExampleRestServicesWithSpring"/>
+	<path id="classpath">
+	    <fileset dir="WebContent/WEB-INF/lib" includes="*.jar"/>
+	 </path>
+	<target name="clean">
+		<delete dir="bin" />
+		<delete file="${warfile}.war"/>
+	</target>
+	<target name="create">
+		<mkdir dir="bin"/>
+		<javac srcdir="src" destdir="bin">		
+		    <classpath refid="classpath" />
+		</javac>
+		<war destfile="${warfile}.war" webxml="WebContent/WEB-INF/web.xml" update="true">		
+		<classes dir="bin"/>
+		<fileset dir="WebContent">
+		<exclude name="WEB-INF/web.xml"/>
+		</fileset>
+		</war>
+	</target>
+
+	
+</project>
